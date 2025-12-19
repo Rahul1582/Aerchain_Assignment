@@ -1,12 +1,13 @@
 // routes/voices.js
-const express = require("express");
-const router = express.Router();
-const controller = require("../controllers/taskController");
+import express  from 'express';
+import taskController from "../controllers/taskController.js";
 
-router.post("/createTask", controller.createTask);
-router.get("/getAllTasks", controller.getAllTasks);
+const router = express.Router();
+
+router.post("/createTask", taskController.createTask);
+// router.get("/getAllTasks", controller.getAllTasks);
 // router.get("/getTaskById/:id", controller.getVoice);
 // router.put("/updateTaskById/:id", controller.updateVoice);
 // router.delete("/deleteTask/:id", controller.deleteVoice);
 
-module.exports = router;
+export default router;

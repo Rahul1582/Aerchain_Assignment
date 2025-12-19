@@ -1,6 +1,6 @@
+import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv";
 import bodyParser from 'body-parser'
 import taskRoutes from './routes/taskRoute.js'
 
@@ -10,7 +10,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-const PORT = 8000;
+const PORT = process.env.PORT;
 
 app.use("/tasks", taskRoutes);
 

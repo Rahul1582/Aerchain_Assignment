@@ -1,18 +1,23 @@
-const prisma = require("../prisma/prisma");
+import supabase from "../config/supabase.js";
 
 class TaskService {
   async createTask(data) {
-    return prisma.task.create({
-      data: {
-        title: data.title,
-        description: data.description || null,
-        status: data.status || "TODO",
-        priority: data.priority || "LOW",
-        dueDate: data.dueDate ? new Date(data.dueDate) : null,
-        position: data.position ?? 0,
-      }
-    });
+    console.log(data)
+    const payload = {
+      title: data.title,
+      description: data.description ?? null,
+      status: data.status ?? "TODO",
+      priority: data.priority ?? "MEDIUM",
+      due_date: data.dueDate ? new Date(data.dueDate).toISOString() : null,
+      position: typeof data.position === "number" ? data.position : 0
+    };
+    const { data: created, error } = await supabase.from("tasks").insert(payload).select().single();
+    if (error) {
+      throw error;
+    }
+    
+    return created;
   }
 }
 
-module.exports = new TaskService();
+export default new TaskService();
