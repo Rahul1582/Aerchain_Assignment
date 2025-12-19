@@ -1,10 +1,11 @@
+import "dotenv/config";
+
 import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
 import bodyParser from 'body-parser'
 import taskRoutes from './routes/taskRoute.js'
 
-dotenv.config();
 
 const app = express();
 app.use(cors());
